@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{ margin: 5rem; background-color: rgba(0, 43, 0, 0.1);}
+    .input{
+      width: 100%;
+    }
+    .input input{
+      width: 100%;
+      border-radius: 10px;
+      font-size: 2rem;
+    }
+  </style>
+  <script src="./dict.js" defer></script>
+  <script src="./search.js" defer></script>
+  <!-- <script src="./smart.js" defer></script> -->
+</head>
+<body>
+  <h1>Optimized Search:</h1>
+  <div class="input">
+    <input type="text" onkeyup="input(this)"/>
+  </div>
+  <div id="found">
+
+  </div>
+  <script>
+    function input(self) {
+      const display = document.getElementById("found");
+      console.time()
+      const {found, matches} = search(dictArray, self.value, 5);
+      console.timeEnd()
+
+      let list = `
+        <ul>
+          ${matches.map(word => `<li>${word}</li>`).join("")}
+        </ul>
+      `
+      display.innerHTML = list;
+    }
+  </script>
+</body>
+</html>
